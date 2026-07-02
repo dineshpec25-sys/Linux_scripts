@@ -1,0 +1,25 @@
+#!/bin/bash
+
+SESSION="work"
+
+# If session already exists, just attach to it
+tmux has-session -t $SESSION 2>/dev/null
+if [ $? = 0 ]; then
+    tmux attach -t $SESSION
+    exit 0
+fi
+
+# Create new session, left pane for work
+tmux new-session -d -s $SESSION -n main
+
+# Split vertically — dashboard on right (30% width)
+tmux split-window -h -p 30 -t $SESSION
+
+# Run dashboard script in right pane (pane 1)
+tmux send-keys -t $SESSION:main.1 "~/dashboard.sh" C-m
+
+# Focus back on left pane (pane 0) for actual work
+tmux select-pane -t $SESSION:main.0
+
+# Attach to the session
+tmux attach -t $SESSION

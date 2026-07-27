@@ -8,7 +8,7 @@ int main() {
 
     while(1)
     {
-	    printf("\033[0;31mmyshell>\033[0m");
+	    printf("\033[0;31mdsh>\033[0m");
 	    fgets(line, sizeof(line), stdin);
 	    line[strcspn(line, "\n")] = '\0';
 	    

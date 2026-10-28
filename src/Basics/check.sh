@@ -7,6 +7,7 @@ fi
 
 if [ ! -d "$PATH_TO_CHECK" ]; then
 	echo "Error!!! $PATH_TO_CHECK doesn't exist or can't find"
+	exit 1
 fi
 
 count=0
